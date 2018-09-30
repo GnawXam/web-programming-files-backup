@@ -1,0 +1,16 @@
+<md-dialog>
+        <md-toolbar>
+            <div class="md-toolbar-tools">
+                <h2>{{date_time | date:'short'}}</h2>
+                <span flex></span>
+
+                <md-button class="md-icon-button" ng-click="cancel()">X</md-button>
+            </div>
+        </md-toolbar>
+
+        <md-card-content>
+            <md-input-container class="md-block">
+                <img class="card-image" ng-src="images/{{ file_name }}">
+            </md-input-container>
+        </md-card-content>
+</md-dialog>

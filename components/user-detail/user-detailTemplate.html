@@ -1,0 +1,74 @@
+<md-card>
+  <md-card-title>
+      <md-card-title-text class="md-headline">
+          Name: {{ user.first_name }} {{ user.last_name }}
+      </md-card-title-text>
+  </md-card-title>
+  <md-card-content>
+    <p>Location: {{user.location}}</p>
+    <p>Description: {{user.description}}</p>
+    <p>Occupation: {{user.occupation}}</P>
+  </md-card-content>
+  <md-card-actions layout="row" layout-align="end center">
+      <md-button ng-click="toPhotos(user._id)">{{user.first_name}}'s Photos</md-button>
+  </md-card-actions>
+</md-card>
+
+<md-card>
+  <md-card-title>
+      <md-card-title-text class="md-headline">
+          Usage detail
+      </md-card-title-text>
+  </md-card-title>
+  <md-card-content>
+    <p>Last uploaded photo: </p>
+    <div ng-if="recentPhoto.photoIndex === undefined" class="noPhoto"> User has no photo! </div>
+    <div ng-if="recentPhoto.photoIndex !== undefined">
+      <a ng-href="#!photos/{{ recentPhoto.user_id }}/{{ recentPhoto.photoIndex }}">
+        <img class="card-image-thumb" ng-src="images/{{ recentPhoto.file_name }}">
+      </a>
+    </div>
+
+    <p>Most commented photo:</p>
+    <div ng-if="mostCommentedPhoto.photoIndex === undefined" class="noPhoto"> User has no photo! </div>
+    <div ng-if="mostCommentedPhoto.photoIndex !== undefined">
+      <a ng-href="#!photos/{{ mostCommentedPhoto.user_id }}/{{ mostCommentedPhoto.photoIndex }}">
+        <img class="card-image-thumb" ng-src="images/{{ mostCommentedPhoto.file_name }}">
+      </a>
+    </div>
+
+  </md-card-content>
+</md-card>
+
+<md-card>
+  <div ng-if="userMentionsList.length>0">
+    <md-card-content>
+        <md-card-title-text class="md-headline">
+            Mentions of {{ user.first_name }} {{ user.last_name }}
+        </md-card-title-text>
+        <md-list class="photoRepeat" ng-repeat="photo in userMentionsList track by photo._id">
+              <md-list-item class="md-2-line">
+
+
+                <div class="md-list-item-text">
+                  <a ng-href="#!photos/{{ photo.user_id }}/{{ photo.photoIndex }}">
+                    <img class="card-image-thumb" ng-src="images/{{ photo.file_name }}">
+                  </a>
+                  <h3>
+                      <a ng-href="#!/users/{{ photo.user_id }}">
+                      Photo posted by: {{ photo.owner_name }}
+                      </a>
+                  </h3>
+                  <a ng-href="#!photos/{{ comment.photo.user_id }}/{{ comment.photoIndex }}">
+                    <p>{{ comment.comment }}</p>
+                  </a>
+                </div>
+              </md-list-item>
+        </md-list>
+    </md-card-content>
+  </div>
+  <div ng-if="userMentionsList.length===0">
+    <h1>No mentions in photos :( </h1>
+  </div>
+</md-card>
+<!-- // gridlist -->

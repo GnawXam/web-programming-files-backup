@@ -1,0 +1,49 @@
+<md-dialog>
+    <form>
+        <md-toolbar>
+            <div class="md-toolbar-tools">
+                <h2>Your comment: {{testName}}</h2>
+                <span flex></span>
+
+                <md-button class="md-icon-button" ng-click="cancel()">X</md-button>
+            </div>
+        </md-toolbar>
+
+        <md-dialog-content>
+
+          <!-- <mentio-menu
+                      mentio-for="'htmlContent'"
+                      mentio-trigger-char="'@'"
+                      mentio-items="people"></mentio-menu> -->
+            <md-input-container class="md-block">
+                <label>Comment</label>
+                <textarea rows="10" cols="100" ng-model="comment" placeholder="Input comment"
+                mentio mentio-id="'message'" mentio-typed-text="typedTerm">
+                </textarea>
+
+                <!-- This is needed to see the menu  -->
+                <mentio-menu mentio-for="'message'"
+                     mentio-trigger-char="'@'"
+                     mentio-items="foundTopics | filter:label:typedTerm"
+                     mentio-search="searchTopic(term)"
+                     mentio-select="getTopicTextRaw(item)">
+                </mentio-menu>
+
+                <!-- <input type="text" mentio
+                id="message"
+                   mentio-id="'message'"
+                   mentio-typed-text="typedTerm"
+                   ng-model="myval"/> -->
+<!--
+   <mentio-menu
+    mentio-for="'test'"
+    mentio-trigger-char="'@'"
+    mentio-items="people"
+    mentio-search="search()"
+        ></mentio-menu> -->
+            </md-input-container>
+            <md-button class="md-raised md-primary" ng-click="submit(comment)">Submit</md-button>
+            <md-button class="md-raised" ng-click="cancel()">Cancel</md-button>
+        </md-dialog-content>
+    </form>
+</md-dialog>

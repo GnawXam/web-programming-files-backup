@@ -1,0 +1,18 @@
+<!--<pre> {{users | json }} </pre>
+-->
+<div ng-if="main.isLoggedIn">
+  <md-list>
+    <div ng-if="!main.enableAdvancedFeature">
+      <md-list-item ng-repeat="user in users track by user._id" ng-click="clickedOnUser(user._id)">
+        {{ user.first_name }} {{ user.last_name }}
+      </md-list-item>
+    </div>
+    <div ng-if="main.enableAdvancedFeature">
+      <md-list-item ng-repeat="user in usersAdv track by user._id">
+        <span ng-click="clickedOnUser(user._id)">{{ user.first_name }} {{ user.last_name }}</span>
+        <span class="photosBubble">{{ user.photosCount }}</span>
+        <span class="commentsBubble" ng-click="clickedOnCommentsBubble(user)">{{ user.commentsCount }}</span>
+      </md-list-item>
+    </div>
+  </md-list>
+</div>

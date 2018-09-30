@@ -1,0 +1,15 @@
+<div ng-if="userFavPhotos.length>0">
+  <h1>Your favorite photos:</h1>
+    <md-card ng-repeat="favPhoto in userFavPhotos track by favPhoto._id">
+        <img class="card-image-thumb" ng-src="images/{{ favPhoto.file_name }}" ng-click="enlargePhoto($event, favPhoto.file_name, favPhoto.date_time)">
+        <md-card-content>
+            <p>{{ favPhoto.date_time | date:'short' }}</p>
+            <div class="favPhotoButton" ng-click="favPhotoClick(favPhoto._id)" ng-style="buttonColor(favPhoto._id)">
+                Favorite
+            </div>
+        </md-card-content>
+    </md-card>
+</div>
+<div ng-if="userFavPhotos.length===0">
+    <h1> You have no favorite photos</h1>
+</div>

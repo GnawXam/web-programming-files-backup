@@ -1,0 +1,32 @@
+<div ng-if="!main.enableAdvancedFeature">
+  <h1>
+    Pleaes turn on advanced features to see this page.
+  </h1>
+</div>
+
+<div ng-if="main.enableAdvancedFeature">
+    <md-card>
+      <md-card-content>
+          <h1>Comments of {{ user.first_name }} {{ user.last_name }}</h1>
+          <md-list class="comment" ng-repeat="comment in commentsList track by comment._id">
+                <md-list-item class="md-2-line">
+
+
+                  <div class="md-list-item-text">
+                    <a ng-href="#!photos/{{ comment.photo.user_id }}/{{ comment.photoIndex }}">
+                      <img class="card-image-thumb" ng-src="images/{{ comment.photo.file_name }}">
+                    </a>
+                    <h3>
+                        <a ng-href="#!/users/{{ comment.user_id }}">
+                        {{ user.first_name }} {{ user.last_name }}
+                        </a>
+                    </h3>
+                    <a ng-href="#!photos/{{ comment.photo.user_id }}/{{ comment.photoIndex }}">
+                      <p>{{ comment.comment }}</p>
+                    </a>
+                  </div>
+                </md-list-item>
+          </md-list>
+      </md-card-content>
+    </md-card>
+</div>

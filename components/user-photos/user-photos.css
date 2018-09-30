@@ -1,0 +1,37 @@
+.menu-highlighted {
+  color: blue;
+}
+
+.scrollable-menu {
+  background-color: gray;
+  color: white;
+  list-style-type: none;
+}
+
+.favPhotoButton{
+  font-weight: bold;
+  border-style: solid;
+  text-align: center;
+  width: 70px;
+  height: 25px;
+  padding: 3px;
+  margin: 5px;
+  background-color: white;
+  color: blue;
+}
+
+.likePhotoButton{
+  font-weight: bold;
+  border-style: solid;
+  text-align: center;
+  width: 100px;
+  height: 25px;
+  padding: 3px;
+  margin: 5px;
+  background-color: white;
+  color: blue;
+}
+
+.favPhotoButton:hover, .likePhotoButton:hover{
+  background-color: silver;
+}

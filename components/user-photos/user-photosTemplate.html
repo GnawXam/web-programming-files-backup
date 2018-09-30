@@ -1,0 +1,65 @@
+<div ng-if="photos.length>0">
+  <div ng-if="!main.enableAdvancedFeature">
+    <md-card ng-repeat="photo in photos  | orderBy:['-likedCount', '-date_time']">
+        <img id="anchor{{photo.photoIndex}}" class="card-image" ng-src="images/{{ photo.file_name }}">
+        <div class="likePhotoButton" ng-click="likePhotoClick(photo._id)" ng-style="likeButtonColor(photo._id)">
+            Like ({{photo.likedCount}})
+        </div>
+        <div class="favPhotoButton" ng-click="favPhotoClick(photo._id)" ng-style="buttonColor(photo._id)">
+            Favorite
+        </div>
+        <md-card-actions layout="row" layout-align="end center">
+            <md-button ng-click="deletePhoto(photo._id)"> Delete photo</md-button>
+        </md-card-actions>
+        <md-card-content>
+            <p>{{ photo.date_time | date:'short' }}</p>
+            <md-list class="comment" ng-repeat="comment in photo.comments track by comment._id">
+                <md-list-item class="md-2-line">
+                    <div class="md-list-item-text">
+                        <h3>
+                            <a ng-href="#!/users/{{ comment.user._id }}">
+                            {{ comment.user.first_name }} {{ comment.user.last_name }}</a>
+                        </h3>
+                        <h4>{{ comment.date_time | date }}</h4>
+                        <p>{{ comment.comment }}</p>
+                        <md-card-actions layout="row" layout-align="end center">
+                            <md-button ng-click="deleteComment(photo._id, comment)"> Delete comment</md-button>
+                        </md-card-actions>
+                    </div>
+                </md-list-item>
+            </md-list>
+            <md-button class="md-raised md-primary" ng-click="addComment($event, photo._id)">Add Comment</md-button>
+        </md-card-content>
+    </md-card>
+  </div>
+
+  <div ng-if="main.enableAdvancedFeature">
+      <div id="stepper-control">
+        <md-button class="md-primary" ng-disabled="photoIndex == 0" ng-click="$location.path('/photos/'+userId+'/'+(photoIndex-1))"> Prev </md-button>
+        Picture {{ photoIndex+1 }} of {{ photos.length }}
+        <md-button class="md-primary" ng-disabled="photoIndex == photos.length-1" ng-click="$location.path('/photos/'+userId+'/'+(photoIndex+1))"> Next </md-button>
+      </div>
+      <md-card>
+        <img class="card-image" ng-src="images/{{ photos[photoIndex].file_name }}">
+        <md-card-content>
+            <p>{{ photos[photoIndex].date_time | date:'short' }}</p>
+            <md-list class="comment" ng-repeat="comment in photos[photoIndex].comments track by comment._id">
+                <md-list-item class="md-2-line">
+                    <div class="md-list-item-text">
+                        <h3>
+                            <a ng-href="#!/users/{{ comment.user._id }}">
+                            {{ comment.user.first_name }} {{ comment.user.last_name }}</a>
+                        </h3>
+                        <h4>{{ comment.date_time | date }}</h4>
+                        <p>{{ comment.comment }}</p>
+                    </div>
+                </md-list-item>
+            </md-list>
+            <md-button class="md-raised md-primary" ng-click="addComment($event, photos[photoIndex]._id)">Add Comment</md-button>
+        </md-card-content>
+      </md-card>
+  </div>
+  </div>
+  <div ng-if="photos.length===0">
+    <h1> No photos available </h1>
+</div>

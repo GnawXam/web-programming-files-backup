@@ -1,0 +1,83 @@
+<div>
+    <md-content>
+      <md-card>
+        <md-card-title>
+            <md-card-title-text class="md-headline">
+                <h1>Log in here</h1>
+                <p id="errorMessage" ng-show="errmsg">{{ errmsg }}</p>
+            </md-card-title-text>
+        </md-card-title>
+        <md-input-container>
+            <label>Username</label>
+            <input ng-model="user">
+        </md-input-container>
+        <md-input-container>
+            <label>Password</label>
+            <input type="password" ng-model="password">
+        </md-input-container>
+
+        <md-button ng-click="login(user, password)"> Log in</md-button>
+      </md-card>
+      <md-card>
+        <md-card-title>
+            <md-card-title-text class="md-headline">
+                <h1>Register a new account</h1>
+            </md-card-title-text>
+        </md-card-title>
+        <form ng-submit="registerAccount()" name="registrationForm">
+            <md-input-container class="md-block" flex-gt-sm>
+                <label>Username</label>
+                <input required name="username" ng-model="reg.login_name" ng-blur="checkUniqueLogin(reg.login_name)">
+                <div ng-messages="registrationForm.username.$error">
+                    <ng-message when="required">This is required.</ng-message>
+                </div>
+                <span id="errorMessage" ng-if="usernameTaken">This username is taken.</span>
+            </md-input-container>
+            <md-input-container class="md-block" flex-gt-sm>
+                <label>Password</label>
+                <input required type="password" name="password" ng-model="reg.password">
+                <div ng-messages="registrationForm.password.$error">
+                    <div ng-message="required">This is required.</div>
+                </div>
+            </md-input-container>
+            <md-input-container class="md-block" flex-gt-sm>
+                <label>Repeat password</label>
+                <input required type="password" name="confirmPassword" ng-model="confirmPassword" ng-blur="check_password(confirmPassword)">
+                <span id="errorMessage" ng-if="!passwordValid">This is not the same password</span>
+            </md-input-container>
+
+            <md-input-container>
+                <label>First Name</label>
+                <input required name="first_name" ng-model="reg.first_name">
+                <div ng-messages="registrationForm.first_name.$error">
+                    <div ng-message="required">This is required.</div>
+                </div>
+            </md-input-container>
+            <md-input-container>
+                <label>Last Name</label>
+                <input required name="last_name" ng-model="reg.last_name">
+                <div ng-messages="registrationForm.last_name.$error">
+                    <div ng-message="required">This is required.</div>
+                </div>
+            </md-input-container>
+
+            <md-input-container>
+                <label>Occupation</label>
+                <input name="occupation" ng-model="reg.occupation">
+            </md-input-container>
+            <md-input-container>
+                <label>Location</label>
+                <input name="location" ng-model="reg.location">
+            </md-input-container>
+            <md-input-container>
+                <label>Description</label>
+                <input name="description" ng-model="reg.description">
+            </md-input-container>
+
+            <div>
+              <md-button type="submit" ng-disabled="!passwordValid">Register Me</md-button>
+            </div>
+        </form>
+      </md-card>
+    </md-content>
+</div>
